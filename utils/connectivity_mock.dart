@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
-import 'package:integration_test/integration_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 class ConnectivityMock {
-  final IntegrationTestWidgetsFlutterBinding binding;
+  final TestWidgetsFlutterBinding binding;
 
   ConnectivityMock(this.binding);
 

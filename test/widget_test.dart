@@ -8,8 +8,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_counter/main.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../utils/connectivity_mock.dart';
 
 void main() {
+  final binding = TestWidgetsFlutterBinding.ensureInitialized()
+      as TestWidgetsFlutterBinding;
+
+  final connectivityMock = ConnectivityMock(binding);
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MiniBlocApp());
@@ -25,5 +30,25 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });
+
+  group('using connectivity mock', () {
+    setUpAll(() {
+      connectivityMock.setup();
+    });
+
+    testWidgets('show error message when connectivity goes down',
+        (WidgetTester tester) async {
+      // Build our app and trigger a frame.
+      await tester.pumpWidget(const MiniBlocApp());
+
+      // disable internet connection
+      connectivityMock.sendPlatformMessageToFramework('none');
+
+      await tester.pumpAndSettle();
+      expect(find.text('Connection.Unavailable'), findsOneWidget);
+      expect(find.text('Connection.Available'), findsNothing);
+      expect(find.text('You are offline!'), findsOneWidget);
+    });
   });
 }

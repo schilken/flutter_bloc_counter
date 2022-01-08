@@ -2,10 +2,9 @@ import 'package:flutter_bloc_counter/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'utils/connectivity_mock.dart';
+import '../utils/connectivity_mock.dart';
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
       as IntegrationTestWidgetsFlutterBinding;
   final connectivityMock = ConnectivityMock(binding);
