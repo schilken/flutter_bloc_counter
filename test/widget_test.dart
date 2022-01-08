@@ -49,6 +49,12 @@ void main() {
       expect(find.text('Connection.Unavailable'), findsOneWidget);
       expect(find.text('Connection.Available'), findsNothing);
       expect(find.text('You are offline!'), findsOneWidget);
+
+      connectivityMock.sendPlatformMessageToFramework('wifi');
+
+      await tester.pumpAndSettle();
+      expect(find.text('Connection.Available'), findsOneWidget);
+      expect(find.text('You are offline!'), findsNothing);
     });
   });
 }
