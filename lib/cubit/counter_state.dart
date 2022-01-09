@@ -8,4 +8,7 @@ class CounterState {
     required this.counterValue,
     required this.wasIncremented,
   });
+
+  @override
+  String toString() => 'CounterState(counterValue: $counterValue, wasIncremented: $wasIncremented)';
 }
