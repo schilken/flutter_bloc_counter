@@ -5,9 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_bloc_counter",
+            "name": "MiniBlocApp",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+        },
+        {
+            "name": "BetterMiniBlocApp",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define=variant=better"
+            ]
         },
         {
             "name": "flutter_bloc_counter (profile mode)",

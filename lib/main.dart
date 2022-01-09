@@ -1,13 +1,25 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_counter/better_start_page.dart';
 import 'package:flutter_bloc_counter/cubit/connectivity_status_cubit.dart';
 import 'package:flutter_bloc_counter/start_page.dart';
+import 'package:logger/logger.dart';
 import 'cubit/counter_cubit.dart';
+import 'global_bloc_observer.dart';
 
 void main() {
-//  runApp(const MiniBlocApp());
-  runApp(const BetterMiniBlocApp());
+  final log = Logger();
+  const _appVariant = String.fromEnvironment('variant');
+  const _isIntegrationTest = bool.fromEnvironment('INTEGRATION_TEST');
+  log.i(
+      'running _appVariant: $_appVariant, _isIntegrationTest: $_isIntegrationTest \n');
+  Bloc.observer = GlobalBlocObserver();
+  if (_appVariant == 'better') {
+    runApp(const BetterMiniBlocApp());
+  } else {
+    runApp(const MiniBlocApp());
+  }
 }
 
 class MiniBlocApp extends StatelessWidget {
